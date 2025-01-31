@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import FileUpload from '../components/FileUpload';
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Add your logout logic here
-    navigate('/');
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   const stats = [
@@ -40,33 +41,27 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold text-dark">Dashboard</div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-dark" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
-                </svg>
-                <span className="text-gray-700">John Doe</span>
-              </div>
+    <div className="min-h-screen bg-gray-100">
+      <nav className="bg-white shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+            </div>
+            <div className="flex items-center">
               <button
                 onClick={handleLogout}
-                className="inline-flex items-center px-4 py-2 rounded-lg bg-accent text-dark hover:bg-opacity-90 transition-all duration-300"
+                className="ml-4 px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-700"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" />
-                </svg>
-                <span>Logout</span>
+                Logout
               </button>
             </div>
           </div>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {stats.map((stat) => (
             <div
@@ -92,6 +87,9 @@ const Dashboard = () => {
             This is a modern authentication system built with React and Tailwind CSS.
             You can customize this dashboard according to your needs.
           </p>
+        </div>
+        <div className="px-4 py-6 sm:px-0">
+          <FileUpload />
         </div>
       </main>
     </div>
